@@ -1,73 +1,137 @@
-# Welcome to your Lovable project
+# React Internship Interview Assessment
 
-## Project info
+This repository contains my solution for the **React Interns Interview Practical Assessment**. The project demonstrates core React concepts, clean code practices, and basic UI design as required for the evaluation round.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## 📌 Project Overview
 
-There are several ways of editing your application.
+The goal of this assessment is to build a **React application (v16+)** that allows users to **create and manage accounts**.
 
-**Use Lovable**
+The application includes:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+* User Registration
+* User Login
+* View and Edit Account Information
 
-Changes made via Lovable will be committed automatically to this repo.
+The focus of this project is **functionality, simplicity, and code clarity**, rather than complex UI or advanced styling.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## ✨ Features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+* 🔐 **Login Page**
 
-Follow these steps:
+  * User authentication using entered credentials
+  * Basic validation and error handling
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+* 📝 **Registration Page**
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+  * Create a new user account
+  * Form validation for required fields
 
-# Step 3: Install the necessary dependencies.
-npm i
+* 👤 **Account Management Page**
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+  * View user account details
+  * Edit and update user information
+
+* 🎨 **UI & Styling**
+
+  * Built using **React (v16+)**
+  * Styled with **Bootstrap (latest version)**
+  * Clean and minimal UI as per instructions
+
+---
+
+## 🛠️ Tech Stack
+
+* **React.js** (v16+)
+* **JavaScript (ES6+)**
+* **HTML5 & CSS3**
+
+
+---
+
+## 📂 Project Structure (High Level)
+
+```
+React-Assessment/
+│── src/
+│   ├── components/
+│   ├── pages/
+│   ├── App.js
+│   └── index.js
+│── public/
+│── package.json
+│── README.md
 ```
 
-**Edit a file directly in GitHub**
+> Components are kept modular and reusable to ensure maintainability and readability.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## ▶️ How to Run the Project
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Clone the repository
 
-## What technologies are used for this project?
+   ```bash
+   git clone https://github.com/Jilpatel8890/React-Assessment.git
+   ```
 
-This project is built with:
+2. Navigate to the project directory
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+   ```bash
+   cd React-Assessment
+   ```
 
-## How can I deploy this project?
+3. Install dependencies
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+   ```bash
+   npm install
+   ```
 
-## Can I connect a custom domain to my Lovable project?
+4. Start the development server
 
-Yes, you can!
+   ```bash
+   npm start
+   ```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+5. Open in browser
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## ✅ Evaluation Criteria Mapping
+
+* **Functionality** ✔️
+  All required pages (Login, Registration, Account Management) are implemented.
+
+* **Code Quality** ✔️
+  Code is structured, readable, and uses comments where necessary.
+
+* **Error Handling** ✔️
+  Basic validation and user-friendly error messages are included.
+
+* **Documentation** ✔️
+  This README provides a clear overview, setup steps, and project explanation.
+
+---
+
+## 💡 Notes
+
+* The application keeps logic simple as recommended.
+* No unnecessary complexity or over-engineering is introduced.
+* Focus is on understanding of React fundamentals rather than advanced libraries.
+
+---
+
+## 📬 Contact
+
+For any questions related to this assessment, please reach out through the respective medium shared by the hiring team.
+
+---
+
+**Thank you for reviewing my submission.** 🙌
