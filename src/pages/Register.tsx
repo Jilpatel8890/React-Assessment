@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle, Loader2, CheckCircle } from 'lucide-react';
+import { AlertCircle, Loader2, CheckCircle, Sparkles } from 'lucide-react';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -122,149 +122,175 @@ const Register: React.FC = () => {
   };
 
   // Password strength indicator
-  const getPasswordStrength = (): { strength: string; color: string } => {
+  const getPasswordStrength = (): { strength: string; color: string; width: string } => {
     const password = formData.password;
-    if (!password) return { strength: '', color: '' };
-    if (password.length < 6) return { strength: 'Too short', color: 'text-destructive' };
-    if (password.length < 8) return { strength: 'Weak', color: 'text-amber-500' };
+    if (!password) return { strength: '', color: '', width: '0%' };
+    if (password.length < 6) return { strength: 'Too short', color: 'bg-destructive', width: '20%' };
+    if (password.length < 8) return { strength: 'Weak', color: 'bg-amber-500', width: '40%' };
     if (password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password)) {
-      return { strength: 'Strong', color: 'text-green-500' };
+      return { strength: 'Strong', color: 'bg-success', width: '100%' };
     }
-    return { strength: 'Medium', color: 'text-amber-500' };
+    return { strength: 'Medium', color: 'bg-amber-500', width: '60%' };
   };
 
   const passwordStrength = getPasswordStrength();
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Create an Account</CardTitle>
-          <CardDescription>
-            Enter your details to create your account
-          </CardDescription>
-        </CardHeader>
+    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12 gradient-hero">
+      <div className="w-full max-w-md opacity-0 animate-scale-in">
+        {/* Logo */}
+        <div className="mb-8 flex justify-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl gradient-primary shadow-glow">
+            <Sparkles className="h-7 w-7 text-primary-foreground" />
+          </div>
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-4">
-            {/* Error Alert */}
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+        <Card className="border-border/40 bg-card/80 backdrop-blur-xl shadow-xl">
+          <CardHeader className="space-y-1 text-center">
+            <CardTitle className="font-display text-2xl font-bold">Create an account</CardTitle>
+            <CardDescription>
+              Enter your details to get started
+            </CardDescription>
+          </CardHeader>
 
-            {/* Name Fields - Side by side on larger screens */}
-            <div className="grid gap-4 sm:grid-cols-2">
+          <form onSubmit={handleSubmit}>
+            <CardContent className="space-y-4">
+              {/* Error Alert */}
+              {error && (
+                <Alert variant="destructive" className="animate-fade-in">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+
+              {/* Name Fields - Side by side on larger screens */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input
+                    id="firstName"
+                    name="firstName"
+                    placeholder="John"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                    autoComplete="given-name"
+                    className="h-11 bg-background/50"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Doe"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                    autoComplete="family-name"
+                    className="h-11 bg-background/50"
+                  />
+                </div>
+              </div>
+
+              {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
+                <Label htmlFor="email">Email</Label>
                 <Input
-                  id="firstName"
-                  name="firstName"
-                  placeholder="John"
-                  value={formData.firstName}
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={formData.email}
                   onChange={handleChange}
                   disabled={isLoading}
-                  autoComplete="given-name"
+                  autoComplete="email"
+                  className="h-11 bg-background/50"
                 />
               </div>
+
+              {/* Password Field */}
               <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
-                  id="lastName"
-                  name="lastName"
-                  placeholder="Doe"
-                  value={formData.lastName}
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Create a password"
+                  value={formData.password}
                   onChange={handleChange}
                   disabled={isLoading}
-                  autoComplete="family-name"
+                  autoComplete="new-password"
+                  className="h-11 bg-background/50"
                 />
+                {/* Password strength indicator */}
+                {formData.password && (
+                  <div className="space-y-1.5">
+                    <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                      <div 
+                        className={`h-full rounded-full transition-all duration-300 ${passwordStrength.color}`}
+                        style={{ width: passwordStrength.width }}
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Password strength: <span className="font-medium">{passwordStrength.strength}</span>
+                    </p>
+                  </div>
+                )}
               </div>
-            </div>
 
-            {/* Email Field */}
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="john.doe@example.com"
-                value={formData.email}
-                onChange={handleChange}
+              {/* Confirm Password Field */}
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="Confirm your password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  disabled={isLoading}
+                  autoComplete="new-password"
+                  className="h-11 bg-background/50"
+                />
+                {/* Password match indicator */}
+                {formData.confirmPassword && formData.password === formData.confirmPassword && (
+                  <p className="flex items-center gap-1 text-xs text-success animate-fade-in">
+                    <CheckCircle className="h-3 w-3" />
+                    Passwords match
+                  </p>
+                )}
+              </div>
+            </CardContent>
+
+            <CardFooter className="flex flex-col space-y-4">
+              {/* Submit Button */}
+              <Button 
+                type="submit" 
+                className="w-full h-11 rounded-lg gradient-primary border-0 font-medium shadow-md hover:shadow-lg transition-shadow" 
                 disabled={isLoading}
-                autoComplete="email"
-              />
-            </div>
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Creating account...
+                  </>
+                ) : (
+                  'Create Account'
+                )}
+              </Button>
 
-            {/* Password Field */}
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Create a password"
-                value={formData.password}
-                onChange={handleChange}
-                disabled={isLoading}
-                autoComplete="new-password"
-              />
-              {/* Password strength indicator */}
-              {passwordStrength.strength && (
-                <p className={`text-xs ${passwordStrength.color}`}>
-                  Password strength: {passwordStrength.strength}
-                </p>
-              )}
-            </div>
-
-            {/* Confirm Password Field */}
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="Confirm your password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                disabled={isLoading}
-                autoComplete="new-password"
-              />
-              {/* Password match indicator */}
-              {formData.confirmPassword && formData.password === formData.confirmPassword && (
-                <p className="flex items-center gap-1 text-xs text-green-500">
-                  <CheckCircle className="h-3 w-3" />
-                  Passwords match
-                </p>
-              )}
-            </div>
-          </CardContent>
-
-          <CardFooter className="flex flex-col space-y-4">
-            {/* Submit Button */}
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Creating account...
-                </>
-              ) : (
-                'Create Account'
-              )}
-            </Button>
-
-            {/* Login Link */}
-            <p className="text-center text-sm text-muted-foreground">
-              Already have an account?{' '}
-              <Link to="/login" className="text-primary hover:underline">
-                Login here
-              </Link>
-            </p>
-          </CardFooter>
-        </form>
-      </Card>
+              {/* Login Link */}
+              <p className="text-center text-sm text-muted-foreground">
+                Already have an account?{' '}
+                <Link to="/login" className="font-medium text-primary hover:underline">
+                  Sign in
+                </Link>
+              </p>
+            </CardFooter>
+          </form>
+        </Card>
+      </div>
     </div>
   );
 };
