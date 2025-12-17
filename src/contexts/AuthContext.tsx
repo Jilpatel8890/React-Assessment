@@ -1,9 +1,4 @@
-/**
- * AuthContext.tsx
- * 
- * This context provides authentication state and methods throughout the app.
- * Uses localStorage to persist user data (simulating a backend).
- */
+
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 

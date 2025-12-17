@@ -1,9 +1,4 @@
-/**
- * ProtectedRoute.tsx
- * 
- * A wrapper component that redirects unauthenticated users to the login page.
- * Used to protect routes that require authentication.
- */
+
 
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -16,7 +11,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();
 
-  // Show nothing while checking auth status
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -25,9 +19,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     );
   }
 
-  // Redirect to login if not authenticated
   if (!isAuthenticated) {
-    // Save the attempted URL for redirecting after login
+    
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

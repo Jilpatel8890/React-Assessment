@@ -1,9 +1,4 @@
-/**
- * Navbar.tsx
- * 
- * Navigation component that displays different links based on auth status.
- * Shows login/register for guests and profile/logout for authenticated users.
- */
+
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -14,9 +9,7 @@ const Navbar: React.FC = () => {
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
-  /**
-   * Handle logout and redirect to login page
-   */
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -26,7 +19,7 @@ const Navbar: React.FC = () => {
     <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo / Brand */}
+          
           <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary">
               <Sparkles className="h-5 w-5 text-primary-foreground" />
@@ -36,11 +29,11 @@ const Navbar: React.FC = () => {
             </span>
           </Link>
 
-          {/* Navigation Links */}
+      
           <div className="flex items-center gap-3">
             {isAuthenticated ? (
               <>
-                {/* Show user name and profile link when logged in */}
+                
                 <span className="hidden text-sm text-muted-foreground sm:inline">
                   Welcome, <span className="font-medium text-foreground">{user?.firstName}</span>
                 </span>
@@ -62,7 +55,7 @@ const Navbar: React.FC = () => {
               </>
             ) : (
               <>
-                {/* Show login/register links for guests */}
+                
                 <Link to="/login">
                   <Button variant="ghost" size="sm" className="rounded-full">
                     Sign in
